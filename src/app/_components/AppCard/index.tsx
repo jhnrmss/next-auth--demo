@@ -20,16 +20,15 @@ const AppCard = ({
   ...props
 }: ICardProps) => {
   return (
-    <Card
-      className={cn(
-        props.classCard,
-        "flex flex-col justify-center items-center shadow-md rounded-lg"
-      )}
-    >
-      <CardHeader className={cn(props.classHeader, "text-5xl font-semibold")}>
+    <Card className={cn(props.classCard, "shadow-md rounded-lg")}>
+      <CardHeader
+        className={cn(props.classHeader, "text-5xl font-semibold text-center")}
+      >
         {Header}
       </CardHeader>
-      <CardTitle className={cn(props.classTitle, "text-xl text-slate-600")}>
+      <CardTitle
+        className={cn(props.classTitle, "text-base text-slate-600 text-center")}
+      >
         {title}
       </CardTitle>
       <CardContent className={props.classContent}>{children}</CardContent>
