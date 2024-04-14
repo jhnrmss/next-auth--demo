@@ -9,18 +9,24 @@ import {
   Form,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { RegisterSchema, RegisterType } from "@/schemas/authSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
 
 const RegisterForm = () => {
-  const methods = useForm();
+  const methods = useForm<RegisterType>({
+    mode: "onChange",
+    resolver: zodResolver(RegisterSchema),
+    defaultValues: { email: "", password: "", confirmPassword: "" },
+  });
 
-  const handleSubmit = () => {
-    console.log("Submitted");
+  const onSubmit = (data: RegisterType) => {
+    console.log("Submitted:", data);
   };
   return (
     <Form {...methods}>
-      <form onSubmit={handleSubmit} className="space-y-5">
+      <div className="space-y-5 py-4">
         <FormField
           control={methods.control}
           name="email"
@@ -69,13 +75,14 @@ const RegisterForm = () => {
           )}
         />
         <AppButton
-          type="submit"
+          type="button"
           ActionMode="onclick"
           className="w-full text-xl py-6"
+          onClick={methods.handleSubmit(onSubmit)}
         >
           Register
         </AppButton>
-      </form>
+      </div>
     </Form>
   );
 };

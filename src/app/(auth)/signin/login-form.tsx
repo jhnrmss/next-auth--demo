@@ -9,18 +9,25 @@ import {
   Form,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { SignInSchema, SignInType } from "@/schemas/authSchema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import { useForm } from "react-hook-form";
 
 const LoginForm = () => {
-  const methods = useForm();
+  const methods = useForm<SignInType>({
+    mode: "onChange",
+    resolver: zodResolver(SignInSchema),
+    defaultValues: { email: "", password: "" },
+  });
 
-  const handleSubmit = () => {
-    console.log("Submitted");
+  const onSubmit = (data: SignInType) => {
+    console.log(data);
   };
+
   return (
     <Form {...methods}>
-      <form onSubmit={handleSubmit} className="space-y-5 py-4">
+      <div className="space-y-5 py-4">
         <FormField
           control={methods.control}
           name="email"
@@ -52,13 +59,13 @@ const LoginForm = () => {
           )}
         />
         <AppButton
-          type="submit"
           ActionMode="onclick"
+          onClick={methods.handleSubmit(onSubmit)}
           className="w-full text-xl py-6"
         >
           Login
         </AppButton>
-      </form>
+      </div>
     </Form>
   );
 };

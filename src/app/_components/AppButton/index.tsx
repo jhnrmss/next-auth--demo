@@ -2,25 +2,18 @@
 import React from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
 import { VariantProps } from "class-variance-authority";
 import Link from "next/link";
 
 interface IButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
-  ActionMode: "redirect" | "onclick" | "navigation";
+  ActionMode: "redirect" | "onclick";
   path?: string;
 }
 
 const AppButton = (props: IButtonProps) => {
-  const router = useRouter();
-
-  const handleRedirectClick = () => {
-    return router.push(props.path as string);
-  };
-
-  if (props.ActionMode === "navigation") {
+  if (props.ActionMode === "redirect") {
     return (
       <Link href={props.path as string}>
         <Button variant={props.variant} className={cn(props.className)}>
@@ -34,9 +27,7 @@ const AppButton = (props: IButtonProps) => {
     <Button
       variant={props.variant}
       className={cn(props.className)}
-      onClick={() =>
-        props.ActionMode === "redirect" ? handleRedirectClick() : props.onClick
-      }
+      onClick={props.onClick}
     >
       {props.children}
     </Button>
