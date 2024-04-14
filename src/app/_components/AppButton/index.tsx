@@ -35,7 +35,7 @@ const AppButton = (props: IButtonProps) => {
       variant={props.variant}
       className={cn(props.className)}
       onClick={() =>
-        props.ActionMode === "redirect" ? handleRedirectClick : props.onClick
+        props.ActionMode === "redirect" ? handleRedirectClick() : props.onClick
       }
     >
       {props.children}
