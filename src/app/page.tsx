@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import AppButton from "./_components/AppButton/page";
 
 export default function Home() {
   return (
@@ -10,9 +11,13 @@ export default function Home() {
           This is a practice in NextJS
         </p>
         <div>
-          <Link href={"/signin"}>
-            <Button className="w-full text-xl py-6">Try Auth</Button>
-          </Link>
+          <AppButton
+            ActionMode="redirect"
+            path="/signin"
+            className="w-full text-xl py-6"
+          >
+            Try Auth
+          </AppButton>
         </div>
       </div>
     </div>
