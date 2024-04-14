@@ -1,4 +1,10 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import React from "react";
 
@@ -12,13 +18,7 @@ interface ICardProps extends React.HTMLAttributes<HTMLDivElement> {
   classContent?: string;
 }
 
-const AppCard = ({
-  children,
-  Header,
-  title,
-  hasSocials,
-  ...props
-}: ICardProps) => {
+const AppCard = ({ children, Header, title, ...props }: ICardProps) => {
   return (
     <Card className={cn(props.classCard, "shadow-md rounded-lg")}>
       <CardHeader
@@ -31,7 +31,9 @@ const AppCard = ({
       >
         {title}
       </CardTitle>
-      <CardContent className={props.classContent}>{children}</CardContent>
+      <CardContent className={cn(props.classContent, "space-y-2")}>
+        {children}
+      </CardContent>
     </Card>
   );
 };

@@ -20,7 +20,7 @@ const RegisterForm = () => {
   };
   return (
     <Form {...methods}>
-      <form onSubmit={handleSubmit} className="space-y-6 py-4">
+      <form onSubmit={handleSubmit} className="space-y-5">
         <FormField
           control={methods.control}
           name="email"
